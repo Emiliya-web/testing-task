@@ -1,0 +1,15 @@
+
+.filter-sidebar {
+    width: 152px;
+    min-height: 1028px;
+    background-color: #BDBDBD;
+    padding: 35px 20px;
+    text-align: left;
+    &__name {
+        margin-bottom: 10px;
+        font-size: 12px;
+    }
+    &__btn {
+        margin-bottom: 10px;
+    }
+}
