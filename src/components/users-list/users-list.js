@@ -1,35 +1,33 @@
 import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Spinner from '../spinner/spinner';
+import UseService from '../../service/useService';
 import './users-list.scss';
 
 const UsersList = ({filter, onUpdateUserId}) => {
-    const url = 'https://jsonplaceholder.typicode.com/users';
 
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(true);
+
+    const {loading, error, getAllUsers} = UseService();
 
     useEffect (() => {
-      const fetchData = async () => {
-        let res = await fetch(url);
-        let response = await res.json();
-
-        const result = response.sort(sortItems)
-        setLoading(false)
-        setData(result)
-      }
-      fetchData();
+        getAllUsers().then(onUsersListLoaded)
     }, []);
+
+    const onUsersListLoaded = (arr) => {
+        const sortArr = arr.sort(sortItems);
+        setData(sortArr);
+    }
 
     const sortItems = (prev, next) => {
         if(filter == 'city') {
-            if(prev.address.city < next.address.city) {return -1}
-            if(prev.address.city > next.address.city) {return 1}
+            if(prev.city < next.city) {return -1}
+            if(prev.city > next.city) {return 1}
             return 0
         }
         if(filter == 'company') {
-            if(prev.company.name < next.company.name) {return -1}
-            if(prev.company.name > next.company.name) {return 1}
+            if(prev.company < next.company) {return -1}
+            if(prev.company > next.company) {return 1}
             return 0
         }
     }
@@ -53,10 +51,10 @@ const UsersList = ({filter, onUpdateUserId}) => {
                         <span>ФИО:</span>{item.name}
                     </p>
                     <p className='users-list-item__city'>
-                        <span>Город:</span>{item.address.city}
+                        <span>Город:</span>{item.city}
                     </p>
                     <p className='users-list-item__company'>
-                        <span>Компания:</span>{item.company.name}
+                        <span>Компания:</span>{item.company}
                     </p>
                     <Link to="/user-profile"
                           className='users-list-item__link'

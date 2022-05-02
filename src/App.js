@@ -31,9 +31,9 @@ function App() {
     getAllUsers().then(onUsersListLoaded)
   }, [])
 
-  useEffect(() => {
-    console.log(data)
-  }, [])
+  // useEffect(() => {
+  //   console.log(data)
+  // }, [])
 
   const onUsersListLoaded = (users) => {
     setData(users)
