@@ -32,14 +32,9 @@ const UsersList = ({filter, onUpdateUserId}) => {
         }
     }
 
-    const logger = (item) => {
-        console.log(item.id)
-    }
-
     useEffect(() => {
         const result = [...data].sort(sortItems)
         setData(result)
-        console.log(result)
     }, [filter])
 
 

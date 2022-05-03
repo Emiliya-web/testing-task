@@ -4,20 +4,18 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 import Filter from './components/filter/filter';
 import UsersList from './components/users-list/users-list';
-import UserProfile from './components/user-profile/userProfile';
 import UseService from './service/useService';
+import FormUser from './components/user-profile/formUser';
 
 
 
 function App() {
-
-  const url = 'https://jsonplaceholder.typicode.com/users';
   
   const [filter, setFilter] = useState('company');
   const [data, setData] = useState([]);
   const [userId, setUserId] = useState(null); 
 
-  const {loading ,error, getAllUsers} = UseService();
+  const {getAllUsers} = UseService();
 
   const onUpdateFilter = (filter) => {
     setFilter(filter)
@@ -31,16 +29,14 @@ function App() {
     getAllUsers().then(onUsersListLoaded)
   }, [])
 
-  // useEffect(() => {
-  //   console.log(data)
-  // }, [])
-
   const onUsersListLoaded = (users) => {
     setData(users)
   }
 
       
   const index = data.findIndex(elem => elem.id === userId);
+
+  console.log(data)
 
   return (
    <Router>
@@ -51,7 +47,7 @@ function App() {
             <UsersList filter={filter} onUpdateUserId={onUpdateUserId}/>
             } />
           <Route path="/user-profile" element={
-            <UserProfile user={data[index]}/>
+            <FormUser user={data[index]} />
           } />
         </Routes>
       </div>

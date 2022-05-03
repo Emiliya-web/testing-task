@@ -33,9 +33,9 @@ const UseService = () => {
         return user
     }
 
-    useEffect(() => {
-        console.log(getUser(0))
-    },[])
+    // useEffect(() => {
+    //     console.log(getUser(0))
+    // },[])
 
 
 

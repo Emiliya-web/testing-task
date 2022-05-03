@@ -14,7 +14,7 @@ const Filter = (props) => {
         const disableButton = () => {
             const initialUrl = document.location.href;
 
-            if (initialUrl == 'http://localhost:3000/user-profile') {
+            if (initialUrl === 'http://localhost:3000/user-profile') {
                 setDisable(true)
             } else {
                 setDisable(false)
@@ -22,7 +22,6 @@ const Filter = (props) => {
         }
         disableButton();
     }, [])
-
 
 
     return (

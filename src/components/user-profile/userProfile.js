@@ -16,27 +16,27 @@ const UserProfile = (props) => {
 	const url = 'https://jsonplaceholder.typicode.com/users'
 
 	const [readOnlyToggle, setReadOnlyToggle] = useState(true);
-	const {loading, error} = UseService();
+	const {loading, error, getUser} = UseService();
 	const [data, setData] = useState({})
 
-	let name = useInput(props.user.name);
-	let username = useInput(props.user.username);
-	let email = useInput(props.user.email);
-	let phone = useInput(props.user.phone);
-	let website = useInput(props.user.website);
-	let street = useInput(props.user.street);
-	let city = useInput(props.user.city);
-	let zipcode = useInput(props.user.zipcode);
-	let comment = useInput(props.user.comment);
+	useEffect(() => {
+		async function setDataUser(index) {
+			const user = await getUser(index);
+			setData(user)
+		}
 
-	// (function logger(user) {
-	// 	const json = JSON.stringify(user, null, 2)
-	// 	console.log(json)
-	// })(props)
+		setDataUser(props.user)
+	}, [])
 
-	// const {...itemProps} = data
-
-	// console.log(name.value)
+	const name = useInput(data.name);
+	let username = useInput(data.username);
+	let email = useInput(data.email);
+	let phone = useInput(data.phone);
+	let website = useInput(data.website);
+	let street = useInput(data.street);
+	let city = useInput(data.city);
+	let zipcode = useInput(data.zipcode);
+	let comment = useInput(data.comment);
 
 	const editProfile = () => setReadOnlyToggle(false);
 
@@ -69,7 +69,7 @@ const UserProfile = (props) => {
 						Редактировать
 			</button>
             </div>
-            <form id="form" className="user-profile__form" onSubmit={e => onSubmit(e)}>
+            <form id="form" className="user-profile__form" onSubmit={onSubmit}>
                 <label htmlFor="input_name">Name</label>
                 <input id="input_name" 
                        type="text"
