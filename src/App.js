@@ -32,11 +32,8 @@ function App() {
   const onUsersListLoaded = (users) => {
     setData(users)
   }
-
       
   const index = data.findIndex(elem => elem.id === userId);
-
-  console.log(data)
 
   return (
    <Router>

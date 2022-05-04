@@ -1,5 +1,6 @@
 import {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import propTypes from 'prop-types'
 import Spinner from '../spinner/spinner';
 import UseService from '../../service/useService';
 import './users-list.scss';
@@ -8,10 +9,11 @@ const UsersList = ({filter, onUpdateUserId}) => {
 
     const [data, setData] = useState([]);
 
-    const {loading, error, getAllUsers} = UseService();
+    const {loading, getAllUsers} = UseService();
 
     useEffect (() => {
-        getAllUsers().then(onUsersListLoaded)
+        getAllUsers()
+        .then(users => onUsersListLoaded(users))
     }, []);
 
     const onUsersListLoaded = (arr) => {
@@ -78,6 +80,11 @@ const UsersList = ({filter, onUpdateUserId}) => {
         </div>
 
     )
+}
+
+UsersList.propTypes = {
+    filter: propTypes.string,
+    onUpdateUserId: propTypes.func
 }
 
 export default UsersList

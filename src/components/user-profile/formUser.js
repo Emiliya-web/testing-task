@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './userProfile.scss';
 
 
-const FormUser = (props) => {
+const FormUser = ({...defaultValues}) => {
     const url = 'https://jsonplaceholder.typicode.com/users';
 
     const [readOnlyToggle, setReadOnlyToggle] = useState(true);
-    const [userId, setUserId] = useState(10)
-
-    const {...defaultValues } = props.user; 
 
     const setAttr = bool => {
         if(bool) {
@@ -28,12 +26,14 @@ const FormUser = (props) => {
 
     const {...attr} = setAttr(readOnlyToggle)
 
+    const {...userInfo} = defaultValues.user;
+
     const {
         register,
         handleSubmit,
         formState: {errors, isSubmitSuccessful},
         reset
-    } = useForm({defaultValues , mode: 'onChange'});
+    } = useForm({defaultValues: userInfo, mode: 'onChange'});
 
     const onSubmit = (data) => {
         fetch(url, {
@@ -44,7 +44,7 @@ const FormUser = (props) => {
 			body: JSON.stringify({...data})
 		})
         .then(res => res.json())
-        .then(json => console.log(json))
+        .then(json => console.log(JSON.stringify(json, null, 2)))
     }
 
     useEffect(() => {
@@ -162,6 +162,30 @@ const FormUser = (props) => {
             </form>
         </div>
     )
+}
+
+FormUser.propTypes = {
+    user: propTypes.shape({
+        name: propTypes.string,
+        username: propTypes.string,
+        email: propTypes.string,
+        phone: propTypes.oneOfType([
+            propTypes.number,
+            propTypes.string
+        ]),
+        website: propTypes.string,
+        street: propTypes.string,
+        city: propTypes.string,
+        zipcode:propTypes.oneOfType([
+            propTypes.number,
+            propTypes.string
+        ]),
+        comment: propTypes.oneOfType([
+            propTypes.number,
+            propTypes.string
+        ])
+    }),
+
 }
 
 export default FormUser

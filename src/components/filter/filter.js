@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
-import './filter.scss'
+import propTypes from 'prop-types';
+import './filter.scss';
 
-const Filter = (props) => {
+const Filter = ({onUpdateFilter}) => {
 
     const [disable, setDisable] = useState(false)
 
     const onClick = (e) => {
         const attr = e.target.getAttribute('name');
-        props.onUpdateFilter(attr)
+        onUpdateFilter(attr)
     }
 
     useEffect(() => {
@@ -41,6 +42,10 @@ const Filter = (props) => {
             </button>
         </aside>
     )
+}
+
+Filter.propTypes = {
+    onUpdateFilter: propTypes.func
 }
 
 export default Filter
