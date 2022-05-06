@@ -32,8 +32,15 @@ function App() {
   const onUsersListLoaded = (users) => {
     setData(users)
   }
-      
+
+  // const saveForm = (data) => {
+  //   const dataToString = JSON.stringify(data);
+  //   localStorage.setItem('users', dataToString);
+  //   setData(data)
+  // };
+  
   const index = data.findIndex(elem => elem.id === userId);
+
 
   return (
    <Router>
@@ -44,7 +51,7 @@ function App() {
             <UsersList filter={filter} onUpdateUserId={onUpdateUserId}/>
             } />
           <Route path="/user-profile" element={
-            <FormUser user={data[index]} />
+            <FormUser user={data[index]}/>
           } />
         </Routes>
       </div>

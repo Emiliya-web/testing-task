@@ -9,6 +9,33 @@ const FormUser = ({...defaultValues}) => {
     const url = 'https://jsonplaceholder.typicode.com/users';
 
     const [readOnlyToggle, setReadOnlyToggle] = useState(true);
+    const [data, setData] = useState({});
+
+    useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        if (user === null) {
+            localStorage.setItem('user', JSON.stringify(defaultValues))
+        }
+        if(defaultValues.user != undefined) {
+            if(JSON.parse(localStorage.getItem('user')).user.id != defaultValues.user.id) {
+                localStorage.setItem('user', JSON.stringify(defaultValues))
+            }
+        }
+        setData(user)
+    }, [])
+
+    const transInfo = () => {
+        if(defaultValues.user != undefined) {
+            let {...userInfo} = defaultValues.user;
+            return userInfo
+        } else {
+            const user = JSON.parse(localStorage.getItem('user'))
+            let {...userInfo} = user.user;
+            return userInfo
+        }
+    }
+
+    const userInfo = transInfo();
 
     const setAttr = bool => {
         if(bool) {
@@ -24,9 +51,7 @@ const FormUser = ({...defaultValues}) => {
         }
     }
 
-    const {...attr} = setAttr(readOnlyToggle)
-
-    const {...userInfo} = defaultValues.user;
+    const {...attr} = setAttr(readOnlyToggle);
 
     const {
         register,
@@ -164,28 +189,28 @@ const FormUser = ({...defaultValues}) => {
     )
 }
 
-FormUser.propTypes = {
-    user: propTypes.shape({
-        name: propTypes.string,
-        username: propTypes.string,
-        email: propTypes.string,
-        phone: propTypes.oneOfType([
-            propTypes.number,
-            propTypes.string
-        ]),
-        website: propTypes.string,
-        street: propTypes.string,
-        city: propTypes.string,
-        zipcode:propTypes.oneOfType([
-            propTypes.number,
-            propTypes.string
-        ]),
-        comment: propTypes.oneOfType([
-            propTypes.number,
-            propTypes.string
-        ])
-    }),
+// FormUser.propTypes = {
+//     user: propTypes.shape({
+//         name: propTypes.string,
+//         username: propTypes.string,
+//         email: propTypes.string,
+//         phone: propTypes.oneOfType([
+//             propTypes.number,
+//             propTypes.string
+//         ]),
+//         website: propTypes.string,
+//         street: propTypes.string,
+//         city: propTypes.string,
+//         zipcode:propTypes.oneOfType([
+//             propTypes.number,
+//             propTypes.string
+//         ]),
+//         comment: propTypes.oneOfType([
+//             propTypes.number,
+//             propTypes.string
+//         ])
+//     }),
 
-}
+// }
 
 export default FormUser
