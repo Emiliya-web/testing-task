@@ -28,13 +28,13 @@ const Filter = ({onUpdateFilter}) => {
     return (
         <aside className="filter-sidebar">
             <p className="filter-sidebar__name">Сортировка</p>
-            <button className="filter-sidebar__btn btn"
+            <button className="btn filter-sidebar__btn"
                     name='city'
                     onClick={onClick}
                     disabled={disable}>
                         По городу
             </button>
-            <button className="filter-sidebar__btn btn" 
+            <button className="btn filter-sidebar__btn" 
                     name='company'
                     onClick={onClick}
                     disabled={disable}>

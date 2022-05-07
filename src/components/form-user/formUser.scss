@@ -1,13 +1,14 @@
 .user-profile {
     position: relative;
     padding: 13px 41px 13px 36px;
-    .wrapper {
+    &__wrapper {
         margin-bottom: 11px;
         display: flex;
         align-items: center;
         justify-content: space-between;
     }
     &__form {
+        position: relative;
         margin-bottom: 10px;
         display: flex;
         flex-direction: column;
@@ -20,6 +21,7 @@
             font-size: 8px;
         }
         input {
+            font-family: 'Roboto', sans-serif;
             padding: 5px 10px;
             margin-bottom: 10px;
             width: 211px;
@@ -32,32 +34,21 @@
             }
         }
         textarea {
+            font-family: 'Roboto', sans-serif;
             resize: none;
             width: 100%;
             height: 55px;
             border: 1px solid #D8D8D8;
             border-radius: 5px;
+            &:focus-visible {
+                outline: 2px solid darkgray;
+            }
         }
     }
-    &__btn {
-        margin-left: auto;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        font-size: 12px;
-        padding: 0 14px;
-        text-align: center;
-        line-height: 24px;
-        &_submit {
-            margin: 10px 0 10px auto;
-            width: 85px;
-            background-color: #52CF4F;
-        }
-        &_back {
-            width: 98px;
-            background-color: #4B51EF;
-            text-decoration: none;
-        }
+    &__btns {
+        position: absolute;
+        bottom: -48px;
+        right: 0px;
     }
     .error {
         margin-bottom: 10px;

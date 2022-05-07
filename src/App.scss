@@ -17,10 +17,24 @@
   border: none;
   border-radius: 5px;
   padding: 10px 14px;
+  text-align: center;
+  font-size: 12px;
   cursor: pointer;
+  &_submit {
+    padding: 5px 14px;
+    margin: 10px 10px 10px auto;
+    width: 85px;
+    background-color: #52CF4F;
+  }
+  &_back {
+    padding: 5px 14px;
+    width: 98px;
+    background-color: #4B51EF;
+    text-decoration: none;
+  }
 }
 
-.title_h3 {
+.title {
   font-size: 14px;
   font-weight: 700;
 }

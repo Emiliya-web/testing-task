@@ -2,30 +2,28 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import propTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import './userProfile.scss';
+import './formUser.scss';
 
 
 const FormUser = ({...defaultValues}) => {
     const url = 'https://jsonplaceholder.typicode.com/users';
 
     const [readOnlyToggle, setReadOnlyToggle] = useState(true);
-    const [data, setData] = useState({});
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'))
         if (user === null) {
             localStorage.setItem('user', JSON.stringify(defaultValues))
         }
-        if(defaultValues.user != undefined) {
-            if(JSON.parse(localStorage.getItem('user')).user.id != defaultValues.user.id) {
+        if(defaultValues.user !== undefined) {
+            if(JSON.parse(localStorage.getItem('user')).user.id !== defaultValues.user.id) {
                 localStorage.setItem('user', JSON.stringify(defaultValues))
             }
         }
-        setData(user)
     }, [])
 
     const transInfo = () => {
-        if(defaultValues.user != undefined) {
+        if(defaultValues.user !== undefined) {
             let {...userInfo} = defaultValues.user;
             return userInfo
         } else {
@@ -82,9 +80,9 @@ const FormUser = ({...defaultValues}) => {
 
     return(
         <div className="user-profile">
-            <div className="wrapper">
-            <h3 className="user-profile__title title_h3">Профиль пользователя</h3>
-            <button className="user-profile__btn btn"
+            <div className="user-profile__wrapper">
+            <h3 className="title user-profile__title">Профиль пользователя</h3>
+            <button className="btn user-profile__btn"
 					type="button"
 					onClick={editProfile}>
 						Редактировать
@@ -101,12 +99,12 @@ const FormUser = ({...defaultValues}) => {
                         {...attr}
                         style = {errors.name?.type === 'required' ? {outline: '1px solid red'} : null}/>
                 {errors?.name && <div className='error'>{errors.name.message}</div>}
-                <label htmlFor="input_user_name">User Name</label>
+                <label htmlFor="input_username">User Name</label>
                 <input  {...register("username",
                         {
                             required: "Username is required"
                         })}
-                        id="input_user_name"
+                        id="input_username"
                         type="text"
                         {...attr}
                         style = {errors.username?.type === 'required' ? {outline: '1px solid red'} : null}/>
@@ -182,35 +180,39 @@ const FormUser = ({...defaultValues}) => {
                         resize="none"
                         style = {errors.username?.type === 'required' ? {outline: '1px solid red'} : null}
                         {...attr}/>
-				<button className='user-profile__btn user-profile__btn_submit'>Отправить</button>
-                <Link to="/" className='user-profile__btn user-profile__btn_back'>На главную</Link>
+                <div className='user-profile__btns'>
+                    <button className='btn btn_submit' 
+                            disabled={readOnlyToggle ? true : false}
+                            style={readOnlyToggle ? {background: '#AFAFAF'} : null}>Отправить</button>
+                    <Link to="/" className='btn btn_back'>На главную</Link>
+                </div>
             </form>
         </div>
     )
 }
 
-// FormUser.propTypes = {
-//     user: propTypes.shape({
-//         name: propTypes.string,
-//         username: propTypes.string,
-//         email: propTypes.string,
-//         phone: propTypes.oneOfType([
-//             propTypes.number,
-//             propTypes.string
-//         ]),
-//         website: propTypes.string,
-//         street: propTypes.string,
-//         city: propTypes.string,
-//         zipcode:propTypes.oneOfType([
-//             propTypes.number,
-//             propTypes.string
-//         ]),
-//         comment: propTypes.oneOfType([
-//             propTypes.number,
-//             propTypes.string
-//         ])
-//     }),
+FormUser.propTypes = {
+    user: propTypes.shape({
+        name: propTypes.string,
+        username: propTypes.string,
+        email: propTypes.string,
+        phone: propTypes.oneOfType([
+            propTypes.number,
+            propTypes.string
+        ]),
+        website: propTypes.string,
+        street: propTypes.string,
+        city: propTypes.string,
+        zipcode:propTypes.oneOfType([
+            propTypes.number,
+            propTypes.string
+        ]),
+        comment: propTypes.oneOfType([
+            propTypes.number,
+            propTypes.string
+        ])
+    }),
 
-// }
+}
 
 export default FormUser

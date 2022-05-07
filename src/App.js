@@ -1,11 +1,11 @@
 
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.scss';
 import Filter from './components/filter/filter';
 import UsersList from './components/users-list/users-list';
 import UseService from './service/useService';
-import FormUser from './components/user-profile/formUser';
+import FormUser from './components/form-user/formUser';
 
 
 
@@ -33,14 +33,7 @@ function App() {
     setData(users)
   }
 
-  // const saveForm = (data) => {
-  //   const dataToString = JSON.stringify(data);
-  //   localStorage.setItem('users', dataToString);
-  //   setData(data)
-  // };
-  
   const index = data.findIndex(elem => elem.id === userId);
-
 
   return (
    <Router>

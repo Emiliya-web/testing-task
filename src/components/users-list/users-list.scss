@@ -1,35 +1,39 @@
 .users {
     padding: 19px 62px 25px 31px;
-    &-list {
+    &__title {
+        margin-bottom: 15px;
+    }
+    &__list {
         list-style-type: none;
-        &-title {
-            margin-bottom: 15px;
+    }
+    .user {
+        margin-bottom: 15px;
+        position: relative;
+        width: 420px;
+        height: 73px;
+        padding: 10px;
+        background-color: #F3F3F3;
+        border-radius: 8px;
+        span {
+            margin-right: 7px;
+            color: #A3A3A3;
+            font-size: 11px;
         }
-        &-item {
-            margin-bottom: 15px;
-            position: relative;
-            width: 420px;
-            height: 73px;
-            padding: 10px;
-            background-color: #F3F3F3;
-            border-radius: 8px;
-            span {
-                margin-right: 7px;
-                color: #A3A3A3;
-                font-size: 11px;
-            }
-            p {
-                margin-bottom: 7px;
-                font-size: 11px;
-            }
-            &__link {
-                position: absolute;
-                bottom: 10px;
-                right: 10px;
-                text-decoration: none;
-                color: #4B51EF;
-                font-size: 12px;
-            }
+        p {
+            margin-bottom: 7px;
+            font-size: 11px;
         }
+        &__link {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            text-decoration: none;
+            color: #4B51EF;
+            font-size: 12px;
+        }
+    }
+    &__count {
+        font-size: 12px;
+        text-align: right;
     }
 }

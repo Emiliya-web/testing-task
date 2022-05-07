@@ -22,12 +22,12 @@ const UsersList = ({filter, onUpdateUserId}) => {
     }
 
     const sortItems = (prev, next) => {
-        if(filter == 'city') {
+        if(filter === 'city') {
             if(prev.city < next.city) {return -1}
             if(prev.city > next.city) {return 1}
             return 0
         }
-        if(filter == 'company') {
+        if(filter === 'company') {
             if(prev.company < next.company) {return -1}
             if(prev.company > next.company) {return 1}
             return 0
@@ -43,18 +43,18 @@ const UsersList = ({filter, onUpdateUserId}) => {
     const renderList = (arr) => {
         const users = arr.map(item => {
             return (
-                <li className='users-list-item' key={item.id} >
-                    <p className='users-list-item__name'>
+                <li className='user' key={item.id} >
+                    <p className='user__name'>
                         <span>ФИО:</span>{item.name}
                     </p>
-                    <p className='users-list-item__city'>
+                    <p className='user__city'>
                         <span>Город:</span>{item.city}
                     </p>
-                    <p className='users-list-item__company'>
+                    <p className='user__company'>
                         <span>Компания:</span>{item.company}
                     </p>
                     <Link to="/user-profile"
-                          className='users-list-item__link'
+                          className='user__link'
                           onClick={() => onUpdateUserId(item.id)}>
                               Подробнее
                     </Link>
@@ -71,12 +71,12 @@ const UsersList = ({filter, onUpdateUserId}) => {
 
     return (
         <div className='users'>
-            <h3 className='users-list-title title_h3'>Список пользователей</h3>
-            <ul className='users-list'>
+            <h3 className='title users__title'>Список пользователей</h3>
+            <ul className='users__list'>
                 {spinner}
                 {content}
             </ul>
-            <p className='users-list__count'>Найдено {data.length} пользователей</p>
+            <p className='users__count'>Найдено {data.length} пользователей</p>
         </div>
 
     )
